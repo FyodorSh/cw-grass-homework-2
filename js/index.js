@@ -6,7 +6,10 @@
 /* 1.
  1. Разобрать функции обхода матриц. (map, ever, some и т.п.).*/
 function hw_1() {
-
+    //filter
+    //map
+    //every/some
+    //reduce
 }
 
 /* 2.
