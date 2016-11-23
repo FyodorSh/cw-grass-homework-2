@@ -7,11 +7,48 @@
  1. Разобрать функции обхода матриц. (map, ever, some и т.п.).*/
 function hw_1() {
 
-    var arr=[5,2,-1,0,3,-2,10,0,6,-4,-8,7];
+    var arr = [5, 2, -3, 0, 3, -2, 10, 0, 6, -4, -8, 7];
+
+    //forEach
+    var sum_forEach = 0;
+    arr.forEach(function (item, i, arr) {
+        sum_forEach += item;
+    });
+    console.log(sum_forEach);
+
     //filter
+    var negArr = arr.filter(function (item) {
+        return item < 0;
+    });
+    console.log(negArr);
+
     //map
+    var absArr = arr.map(function (item) {
+        if (item < 0) {
+            return item * -1;
+        } else {
+            return item;
+        }
+    });
+    console.log(absArr);
+
     //every/some
+    function isZero(number) {
+        return (number === 0);
+    }
+
+    console.log({
+        "every": arr.every(isZero),
+        "some": arr.some(isZero)
+    });
+
     //reduce
+    var obj = arr.reduce(function (sum, current, i) {
+        sum["item" + i] = current;
+        return sum;
+    }, {});
+
+    console.log(obj);
 }
 
 /* 2.
@@ -72,15 +109,45 @@ function hw_2() {
  3. На скрине дано 3 матрици. А - матрица рядов, Б матрица столбов, С матрица опорного плана( квадратная матрица).
  Решить транспортную задачу на основе этих матриц методом Северо- Западного угла.*/
 function hw_3() {
-    var matrixC = [[1, 3, 4, 2], [4, 5, 8, 3], [2, 3, 6, 7]];
     var matrixA = [60, 80, 100];
     var matrixB = [40, 60, 80, 60];
+    var matrixC = [[1, 3, 4, 2], [4, 5, 8, 3], [2, 3, 6, 7]];
 
-   // console.log(matrixC);
+    var result = {};
+    var sum = 0;
+    var step=1;
+
+    for (var row = 0; row < matrixA.length; row++){
+        for(var col = 0; col < matrixB.length; col++){
+
+            if (matrixB[col] === 0) continue;
+            if (matrixA[row] === 0) break;
+
+
+            var minimum = Math.min(matrixA[row], matrixB[col]);
+
+            matrixA[row] -= minimum;
+            matrixB[col] -= minimum;
+
+            sum += matrixC[row][col] * minimum;
+
+            result["Step " + step]= matrixC[row][col] * minimum;
+            step++;
+        }
+    }
+
+    result["Sum"] = sum;
+
+    console.log(result);
 }
 
 function load_hw() {
+    console.log("--hw1--");
     hw_1();
+
+    console.log("--hw2--");
     hw_2();
+
+    console.log("--hw3--");
     hw_3();
 }
