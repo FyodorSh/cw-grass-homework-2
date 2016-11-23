@@ -11,7 +11,7 @@ function hw_1() {
 
     //forEach
     var sum_forEach = 0;
-    arr.forEach(function (item, i, arr) {
+    arr.forEach(function (item) {
         sum_forEach += item;
     });
     console.log(sum_forEach);
@@ -115,12 +115,15 @@ function hw_3() {
 
     var result = {};
     var sum = 0;
-    var step=1;
+    var step = 1;
 
+    var col = 0;
     for (var row = 0; row < matrixA.length; row++){
-        for(var col = 0; col < matrixB.length; col++){
+        // for(var col = 0; col < matrixB.length; col++){
+        while(col< matrixB.length){
 
-            if (matrixB[col] === 0) continue;
+            if (matrixB[col] === 0) col++;
+    //        if (matrixB[col] === 0) continue;
             if (matrixA[row] === 0) break;
 
 
@@ -131,7 +134,7 @@ function hw_3() {
 
             sum += matrixC[row][col] * minimum;
 
-            result["Step " + step]= matrixC[row][col] * minimum;
+            result["Step " + step] = {"row":row, "col":col, "matrixValue":matrixC[row][col], "stepSum": matrixC[row][col] * minimum};
             step++;
         }
     }
