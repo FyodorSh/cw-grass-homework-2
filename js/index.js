@@ -51,6 +51,7 @@ function hw_1() {
     console.log(obj);
 }
 
+
 /* 2.
  2. Сгенерировать массив случайных чисел типа integer, размером ‎1 000 000. Отсортироать его по возрастанию и по убыванию.
  Найти сумму елементов. Вывести результат в консоль( 3 массива, сумма, время работы циклов сортировки и генерации).*/
@@ -113,17 +114,25 @@ function hw_3() {
     var matrixB = [40, 60, 80, 60];
     var matrixC = [[1, 3, 4, 2], [4, 5, 8, 3], [2, 3, 6, 7]];
 
+    var matrixRes = new Array();
+    ;
+    for (var row = 0; row < matrixA.length; row++) {
+        matrixRes.push([]);
+        for (var col = 0; col < matrixB.length; col++) {
+            matrixRes[row].push(0);
+        }
+    }
     var result = {};
     var sum = 0;
     var step = 1;
 
     var col = 0;
-    for (var row = 0; row < matrixA.length; row++){
+    for (var row = 0; row < matrixA.length; row++) {
         // for(var col = 0; col < matrixB.length; col++){
-        while(col< matrixB.length){
+        while (col < matrixB.length) {
 
             if (matrixB[col] === 0) col++;
-    //        if (matrixB[col] === 0) continue;
+            //        if (matrixB[col] === 0) continue;
             if (matrixA[row] === 0) break;
 
 
@@ -134,13 +143,20 @@ function hw_3() {
 
             sum += matrixC[row][col] * minimum;
 
-            result["Step " + step] = {"row":row, "col":col, "matrixValue":matrixC[row][col], "stepSum": matrixC[row][col] * minimum};
+            matrixRes[row][col] = minimum;
+
+            result["Step " + step] = {
+                "row": row,
+                "col": col,
+                "matrixValue": matrixC[row][col],
+                "stepSum": matrixC[row][col] * minimum
+            };
             step++;
         }
     }
 
     result["Sum"] = sum;
-
+    result["matrixRes"] = matrixRes;
     console.log(result);
 }
 
